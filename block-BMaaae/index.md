@@ -11,11 +11,11 @@ Write code to:-
  - db.createCollection('football')
  - db.createCollection('TT')
 - add multiple players in those collections which should have fields like `name`, `age` and `email` and `bid_price`.
- -  db.cricket.insertMany([{"name": "Elliot Alderson", "age": 27, "email": "ea@protonmail.com", "bid_price": 300}])
+ -  db.cricket.insertMany([{"name": "Elliot Alderson", "age": 27, "email": "ea@protonmail.com", "bid_price": 300},{"name": "Darlene Alderson", "age": 23, "email": "da@protonmail.com", "bid_price": 123},{"name": "Angela Moss", "age": 27, "email": "amoss@gmail.com", "bid_price": 150}])
 
-db.football.insertMany([{"name": "Darlene Alderson", "age": 23, "email": "da@protonmail.com", "bid_price": 123}])
+db.football.insertMany([{"name": "Darlene Alderson", "age": 23, "email": "da@protonmail.com", "bid_price": 123},{"name": "Angela Moss", "age": 27, "email": "amoss@gmail.com", "bid_price": 150},{"name": "Elliot Alderson", "age": 27, "email": "ea@protonmail.com", "bid_price": 300}])
 
-db.tt.insertMany([{"name": "Angela Moss", "age": 27, "email": "amoss@gmail.com", "bid_price": 150}])
+db.tt.insertMany([{"name": "Angela Moss", "age": 27, "email": "amoss@gmail.com", "bid_price": 150}],{"name": "Elliot Alderson", "age": 27, "email": "ea@protonmail.com", "bid_price": 300},{"name": "Darlene Alderson", "age": 23, "email": "da@protonmail.com", "bid_price": 123})
 - list all collections in sports database.
  - show collections
 - rename `TT` collection to `tennis`.
