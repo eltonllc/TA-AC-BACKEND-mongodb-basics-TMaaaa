@@ -3,9 +3,13 @@ writeCode
 Write code to execute below expressions.
 
 1. Create a database named `blog`.
+ - use blog
 2. Create a collection called 'articles'.
+ - db.createCollection("articles")
 3. Insert multiple documents(at least 3) into articles. It should have fields
+ 
 
+ db.articles.insertMulti(articles)
 - title as string
 - createdAt as date
 - details as String
@@ -16,6 +20,42 @@ Write code to execute below expressions.
     - age
     - example author: {name: 'abc', email: 'abc@gmail', age: 25}
 - tags : Array of strings like ['html', 'css']
+
+- var articles =  [
+     {
+       title : "Mr. Robot",
+       createdAt : "2019-08-02",
+       details :" Its a show about Rebellion, hacking and loneliness" ,
+       author : {
+         name : "Samm Esmail",
+         email:"SamE@gmail.com",
+         age:38,
+       }
+       tags : ["philoshphical", "drama", "suspense"]
+     },
+   {
+       title : "Westworld",
+       createdAt : "2019-08-02" ,
+       details : " A show about a theme park where androids serve humans and later become consious and rebel",
+       author : {
+         name :"Jonathan Nolan",
+         email:"JL@westworld.com",
+         age:35,
+       }
+       tags : ["sci-fi", "suspense", "philosophical"]
+     },
+     {
+       title : "What we do in the shadows",
+       createdAt :  "2019-08-02",
+       details : "A mockumentary about vampires living in Staten island",
+       author : {
+         name :"Taika Waititi",
+         email:TW@jjrabbit.com,
+         age:35,
+       }
+       tags : ["comedy", "mockumentary"]
+     }
+ ]
 
 ```js
 // An article should look like in the database
@@ -33,23 +73,36 @@ Write code to execute below expressions.
 ```
 
 4. Find all the articles using `db.COLLECTION_NAME.find()`
+ - db.articles.find()
 5. Find a document using \_id field.
+ - db.articles.find({_id: ObjectId("5fb6896c38b7340edf79ba65")}).pretty()
 6. 1. Find documents using title
+ - db.articles.find({title: "What we do in the shadows"}).pretty()
 7. 2. Find documents using author's name field.
+ = db.articles.find({author.name: "Taika Waititi"}).pretty()
 8. Find document using a specific tag.
+ - db.articles.find({tags: "comedy"}).pretty()
 
 9. Update title of a document using its \_id field.
+ - db.articles.update({_id: ObjectId("5fb6896c38b7340edf79ba65")}, {$set: {title: "What are we doing in the shadows?"}})
 10. Update a author's name using article's title.
+ - db.articles.update({author.name: "Taika Waititi"}, {$set: {author.name: "Jojo Rabbit Hitler Guy"}})
 11. rename details field to description from all articles in articles collection.
+ - db.articles.updateMany( {}, { $rename: { "details": "description" } } )
 12. Add additional tag in a specific document.
-
+ - db.articles.update({_id: ObjectId("5fb697392eeb6199abb8310a")}, {$push: {"tags": "www"}})
 13. Update an article's title using $set and without $set.
+ - db.articles.update({_id: ObjectId("5fb697392eeb6199abb8310a")}, {$set: {title: "What we do in the Shadows"}})
 
+ - db.articles.update({_id: ObjectId("5fb697392eeb6199abb8310a")}, {title: "What we do in the shadows"})
 - Write the differences here ?
+ - Without the set command, the entire document gets over written by the new data while the set attribute only updates the document.
 
 13. find an article using title and increment it's auhtor's age by 5.
+ - db.articles.update({title: "What we do in the shadows")}, {$inc: {author.age: 5}})
 
 14. Delete a document using \_id field with `db.COLLECTION_NAME.remove()`.
+  - db.articles.remove({"title" : "What we do in the shadows"})
 
 // Sample data
 
@@ -168,6 +221,10 @@ db.users.insertMany([
 Insert above data into database to perform below queries:-
 
 - Find all males who play cricket.
+  - db.users.find({sports: "cricket"})
 - Update user with extra golf field in sports array whose name is "Steve Ortega".
+ - db.users.find({name: "Steve Ortega"}).pretty()
 - Find all users who play either 'football' or 'cricket'.
+ - db.users.find({sports:{$in:['football','cricket']}}).pretty()
 - Find all users whose name includes 'ri' in their name.
+ - db.users.find({"name": {$regex: /[r][i]/}}).pretty()
